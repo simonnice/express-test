@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+let fortune = require('./lib/fortune.js')
 
 // Set up handlebars view engine
 let handlebars = require('express-handlebars')
@@ -21,14 +22,6 @@ app.set('view engine', 'handlebars')
 // Setting upp example of dynamic information - 
 //Fortune cookie array
 
-let fortunes = [
-    "Conquer your fears or they will conquer you.",
-    "Rivers need springs.",
-    "Do not fear what you don't know.",
-    "You will have a pleasant surprise.",
-    "Whenever possible, keep it simple.", 
-]
-
 app.set('port', process.env.PORT || 3000)
 
 // Declaring static middleware for public files JS, CSS, Images
@@ -43,9 +36,7 @@ app.get('/', (req, res) => {
 // About Page Route - 
 // rendering a variable containing random index of fortune
 app.get('/about', (req, res) => {
-    let randomFortune = 
-                fortunes[Math.floor(Math.random() * fortunes.length)]
-    res.render('about', { fortune: randomFortune })
+    res.render('about', { fortune: fortune.getFortune() })
 })
 
 // 404 catch-all handler page (middleware)
