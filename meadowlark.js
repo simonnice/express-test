@@ -27,6 +27,13 @@ app.set('port', process.env.PORT || 3000)
 // Declaring static middleware for public files JS, CSS, Images
 app.use(express.static(__dirname + '/public'));
 
+// Declaring middleware to detect if test website
+app.use( (req, res, next) => {
+    res.locals.showTests = app.get('env') !== 'production' &&
+                req.query.test === '1'
+    next()
+})
+
 
 // Home Page Route
 app.get('/', (req, res) => {
@@ -36,7 +43,20 @@ app.get('/', (req, res) => {
 // About Page Route - 
 // rendering a variable containing random index of fortune
 app.get('/about', (req, res) => {
-    res.render('about', { fortune: fortune.getFortune() })
+    res.render('about', { 
+            fortune: fortune.getFortune(),
+            pageTestScript: '/qa/tests-about.js'
+        })
+})
+
+// Tour Hood River Route
+app.get('/tours/hood-river', (req, res) => {
+    res.render('tours/hood-river')
+})
+
+// Tour Hood River request Rate Route
+app.get('/tours/request-group-rate', (req, res) => {
+    res.render('tours/request-group-rate')
 })
 
 // 404 catch-all handler page (middleware)
