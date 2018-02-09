@@ -1,0 +1,20 @@
+{
+  "name": "express-example",
+  "version": "1.0.0",
+  "description": "Following express book example",
+  "main": "meadowlark.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Express",
+    "Ethan",
+    "Brown"
+  ],
+  "author": "Simon Bååt",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2",
+    "express-handlebars": "^3.0.0"
+  }
+}
